@@ -1,0 +1,184 @@
+/* ECAE IT Help kiosk shell */
+:root {
+  --ecae-blue: #0034A8;
+  --ecae-dark-blue: #00277F;
+  --ecae-tint: #EDF3FF;
+  --text-dark: #1F2937;
+  --text-grey: #4B5563;
+  --danger: #B42318;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Arabic", Tahoma, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: #F5F7FA;
+  color: var(--text-dark);
+  font-family: var(--font);
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  overscroll-behavior: none;
+}
+
+[hidden] { display: none !important; }
+
+.app-frame {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #F5F7FA;
+}
+
+body.unlocked .app-frame { top: 72px; height: calc(100% - 72px); }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 56px;
+  padding: 12px 22px;
+  border: 2px solid var(--ecae-blue);
+  border-radius: 14px;
+  font: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn-primary { background: var(--ecae-blue); color: #fff; }
+.btn-primary:active { background: var(--ecae-dark-blue); }
+.btn-ghost { background: #fff; color: var(--ecae-blue); }
+.btn-ghost:active { background: var(--ecae-tint); }
+.btn-light { background: #fff; color: var(--ecae-blue); border-color: #fff; }
+.btn-wide { width: 100%; margin-top: 16px; }
+
+/* Start screen */
+.start-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: radial-gradient(circle at 20% 15%, rgba(255,255,255,.10) 0 220px, transparent 221px),
+              radial-gradient(circle at 85% 90%, rgba(255,255,255,.07) 0 300px, transparent 301px),
+              var(--ecae-blue);
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+}
+.start-card { max-width: 640px; }
+.start-logo {
+  width: min(320px, 70vw);
+  padding: 20px 26px;
+  margin-bottom: 36px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 12px 40px rgba(0,0,0,.25);
+}
+.start-screen h1 { font-size: clamp(32px, 6vw, 56px); line-height: 1.15; }
+.start-ar { margin-top: 8px; font-size: clamp(24px, 4.5vw, 40px); font-weight: 700; opacity: .95; }
+.start-tap { margin: 48px 0 16px; font-size: 64px; animation: pulse 1.8s ease-in-out infinite; }
+.start-cta { font-size: clamp(20px, 3.5vw, 28px); font-weight: 600; opacity: .95; }
+@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+
+/* Modals */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(10, 24, 48, .72);
+}
+.modal {
+  width: 100%;
+  max-width: 460px;
+  max-height: 100%;
+  overflow: auto;
+  padding: 28px 24px 24px;
+  border-top: 8px solid var(--ecae-blue);
+  border-radius: 22px;
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 25px 70px rgba(0,0,0,.35);
+}
+.modal-icon {
+  display: flex; align-items: center; justify-content: center;
+  width: 64px; height: 64px; margin: 0 auto 14px;
+  border-radius: 18px; background: var(--ecae-tint); font-size: 32px;
+}
+.modal h2 { color: var(--ecae-blue); font-size: 26px; }
+.modal p { margin-top: 10px; font-size: 18px; line-height: 1.6; color: var(--text-grey); }
+.modal .modal-ar { margin-top: 4px; }
+
+/* PIN pad */
+.pin-help { font-size: 16px !important; margin-top: 6px !important; }
+.pin-dots { display: flex; justify-content: center; gap: 14px; margin: 20px 0 6px; }
+.pin-dots span {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid var(--ecae-blue); background: #fff;
+}
+.pin-dots span.on { background: var(--ecae-blue); }
+.pin-status { min-height: 26px; font-size: 16px !important; font-weight: 600; }
+.pin-status.error { color: var(--danger) !important; }
+.pin-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 8px;
+}
+.pin-pad button {
+  min-height: 68px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--ecae-tint);
+  color: var(--ecae-blue);
+  font: inherit;
+  font-size: 28px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.pin-pad button:active { background: #D6E4FF; }
+.pin-pad .pin-fn { font-size: 18px; background: #F1F3F6; color: var(--text-grey); }
+.shake { animation: shake .4s; }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-10px); }
+  40%, 80% { transform: translateX(10px); }
+}
+
+/* Admin bar */
+.admin-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 72px;
+  padding: 8px 16px;
+  background: #7A2E0E;
+  color: #fff;
+  font-size: 16px;
+}
+.admin-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.admin-actions .btn { min-height: 48px; font-size: 15px; padding: 8px 14px; }
+
+@media (max-width: 600px) {
+  .admin-bar { flex-direction: column; align-items: stretch; }
+  body.unlocked .app-frame { top: 128px; height: calc(100% - 128px); }
+  .pin-pad button { min-height: 60px; }
+}
