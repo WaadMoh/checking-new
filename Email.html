@@ -1,0 +1,1293 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+
+    <title>ECAE Email</title>
+
+    <style>
+        :root {
+            --ecae-blue: #0034A8;
+            --ecae-dark-blue: #00277F;
+            --ecae-light-blue: #EDF3FF;
+            --ecae-teal: #ADEDEA;
+            --background: #F5F7FA;
+            --text-dark: #1F2937;
+            --text-grey: #5B6472;
+            --success: #157347;
+            --white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--background);
+            color: var(--text-dark);
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        /* =========================================
+           HEADER
+        ========================================= */
+
+        .page-header {
+            background: var(--ecae-blue);
+            color: white;
+            padding: 35px 20px;
+        }
+
+        .header-container {
+            position:relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            width: 92%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .header-text h1 {
+            margin-bottom: 8px;
+            font-size: clamp(28px, 5vw, 40px);
+        }
+
+        .header-text p {
+            line-height: 1.6;
+        }
+
+        .header-logo {
+            flex-shrink: 0;
+            padding: 14px 18px;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-logo img {
+            display: block;
+            width: 185px;
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+                .language-switcher {
+            position: absolute;
+            top: -32px;
+            right: 25px;
+            z-index: 20;
+            display: flex;
+            gap: 8px;
+        }
+        
+        .language-switcher button {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 6px;
+            background: white;
+            color: var(--ecae-blue);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .language-switcher button:hover {
+            background: #EDF3FF;
+        }
+
+        /* =========================================
+           MAIN CONTENT
+        ========================================= */
+
+        main {
+            width: 92%;
+            max-width: 1000px;
+            margin: 46px auto;
+        }
+
+        .introduction {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .introduction h2 {
+            margin-bottom: 10px;
+            color: var(--ecae-blue);
+            font-size: 29px;
+        }
+
+        .introduction p {
+            color: var(--text-grey);
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           GUIDE OPTIONS
+        ========================================= */
+
+       .guide-options {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .guide-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 650px;
+            min-height: 420px;
+            padding: 50px 40px;
+            border: 1px solid #DCE5F3;
+            border-top: 8px solid var(--ecae-blue);
+            border-radius: 20px;
+            background: white;
+            text-align: center;
+            box-shadow: 0 12px 35px rgba(0, 52, 168, 0.12);
+            transition: all 0.3s ease;
+        }
+        
+        .guide-option:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 45px rgba(0, 52, 168, 0.18);
+        }
+
+
+        .option-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 76px;
+            height: 76px;
+            margin-bottom: 18px;
+            border-radius: 18px;
+            background: var(--ecae-light-blue);
+            font-size: 37px;
+        }
+
+        .guide-option h3 {
+            margin-bottom: 12px;
+            color: var(--ecae-blue);
+            font-size: 22px;
+        }
+
+        .guide-option p {
+            flex-grow: 1;
+            margin-bottom: 22px;
+            color: var(--text-grey);
+            line-height: 1.7;
+        }
+
+        .guide-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 235px;
+            min-height: 49px;
+            padding: 13px 18px;
+            border: 2px solid var(--ecae-blue);
+            border-radius: 9px;
+            background: var(--ecae-blue);
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .guide-button:hover {
+            border-color: var(--ecae-dark-blue);
+            background: var(--ecae-dark-blue);
+        }
+
+
+
+        /* =========================================
+           BACK BUTTON
+        ========================================= */
+
+        .back-section {
+            margin-top: 32px;
+            text-align: center;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 12px 22px;
+            border: 2px solid var(--ecae-blue);
+            border-radius: 9px;
+            background: white;
+            color: var(--ecae-blue);
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .back-button:hover {
+            background: var(--ecae-light-blue);
+        }
+
+        /* =========================================
+           INTERACTIVE GUIDE
+        ========================================= */
+
+        .interactive-guide {
+            display: none;
+        }
+
+        .interactive-guide.visible {
+            display: block;
+        }
+
+        .interactive-heading {
+            margin-bottom: 28px;
+            text-align: center;
+        }
+
+        .interactive-heading h2 {
+            margin: 17px 0 8px;
+            color: var(--ecae-blue);
+            font-size: 28px;
+        }
+
+        .interactive-heading p {
+            color: var(--text-grey);
+            line-height: 1.7;
+        }
+
+        .return-button {
+            padding: 11px 18px;
+            border: 2px solid var(--ecae-blue);
+            border-radius: 8px;
+            background: white;
+            color: var(--ecae-blue);
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .return-button:hover {
+            background: var(--ecae-light-blue);
+        }
+
+        /* =========================================
+           PROGRESS BAR
+        ========================================= */
+
+        .progress-information {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 9px;
+            color: var(--ecae-blue);
+            font-weight: 700;
+        }
+
+        .progress-bar {
+            height: 10px;
+            margin-bottom: 24px;
+            border-radius: 20px;
+            background: #DCE5EF;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 20%;
+            height: 100%;
+            background: var(--ecae-blue);
+            transition: width 0.3s ease;
+        }
+
+        /* =========================================
+           STEP CARDS
+        ========================================= */
+
+        .step-card {
+            display: none;
+            padding: 34px;
+            border: 1px solid #DCE5F3;
+            border-radius: 18px;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0, 52, 168, 0.09);
+        }
+
+        .step-card.active {
+            display: block;
+            animation: showStep 0.35s ease;
+        }
+
+        @keyframes showStep {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .step-number {
+            display: inline-block;
+            padding: 7px 13px;
+            border-radius: 7px;
+            background: var(--ecae-teal);
+            color: #004F4A;
+            font-weight: 700;
+        }
+
+        .step-card h3 {
+            margin: 16px 0 12px;
+            color: var(--ecae-blue);
+            font-size: 24px;
+        }
+
+        .instruction-list {
+            margin: 18px 0;
+            padding-left: 24px;
+        }
+
+        .instruction-list li {
+            margin-bottom: 11px;
+            line-height: 1.75;
+        }
+
+        /* =========================================
+           INFORMATION NOTES
+        ========================================= */
+
+        .information-note {
+            margin: 18px 0;
+            padding: 15px;
+            border-left: 5px solid var(--ecae-blue);
+            border-radius: 8px;
+            background: var(--ecae-light-blue);
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           STEP LINKS
+        ========================================= */
+
+        .step-links {
+            margin-top: 18px;
+        }
+
+        .step-link {
+            display: inline-block;
+            margin: 5px 5px 5px 0;
+            padding: 11px 18px;
+            border: 2px solid var(--ecae-blue);
+            border-radius: 8px;
+            background: var(--ecae-light-blue);
+            color: var(--ecae-blue);
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .step-link:hover {
+            background: #DCE8FF;
+        }
+
+        /* =========================================
+           NAVIGATION BUTTONS
+        ========================================= */
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 26px;
+        }
+
+        .next-button,
+        .previous-button {
+            padding: 12px 19px;
+            border: 2px solid var(--ecae-blue);
+            border-radius: 9px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .next-button {
+            background: var(--ecae-blue);
+            color: white;
+        }
+
+        .next-button:hover {
+            background: var(--ecae-dark-blue);
+        }
+
+        .previous-button {
+            background: white;
+            color: var(--ecae-blue);
+        }
+
+        .previous-button:hover {
+            background: var(--ecae-light-blue);
+        }
+
+        /* =========================================
+           COMPLETION SCREEN
+        ========================================= */
+
+        .completion-card {
+            text-align: center;
+        }
+
+        .completion-icon {
+            margin-bottom: 12px;
+            font-size: 58px;
+        }
+
+        .completion-card h3 {
+            color: var(--success);
+        }
+
+        .completion-card p {
+            line-height: 1.7;
+        }
+
+        .completion-actions {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        footer {
+            margin-top: 50px;
+            padding: 22px;
+            background: var(--ecae-blue);
+            color: white;
+            text-align: center;
+        }
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 700px) {
+            .header-container {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+
+            .header-logo img {
+                width: 160px;
+            }
+
+            .guide-options {
+                grid-template-columns: 1fr;
+            }
+
+            .guide-option {
+                min-height: 300px;
+            }
+
+            .step-card {
+                padding: 25px 19px;
+            }
+
+            .navigation-buttons {
+                flex-direction: column-reverse;
+            }
+
+            .navigation-buttons button {
+                width: 100%;
+            }
+
+            .completion-actions {
+                flex-direction: column;
+            }
+
+            .completion-actions button,
+            .completion-actions a {
+                width: 100%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="kiosk/kiosk.css">
+</head>
+
+<body>
+
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+
+    <header class="page-header">
+        <div class="header-container">
+            <button type="button" class="kiosk-home" data-nav="home.html"><span class="kiosk-home-arrow" aria-hidden="true">←</span> <span data-k="home">Home</span></button>
+            <div class="language-switcher">
+                <button onclick="setLanguage('en')">🇬🇧 English</button>
+                <button onclick="setLanguage('ar')">🇦🇪 العربية</button>
+            </div>
+
+
+            <div class="header-text">
+                <h1 id="pageTitle">ECAE Email</h1>
+
+                <p id="pageDescription">
+                    View this support guide.
+                </p>
+            </div>
+
+             <div class="header-logo">
+               <img src="Logoc.png" alt="Emirates College for Advanced Education" draggable="false"></div>
+
+        </div>
+    </header>
+
+    <main>
+
+        <!-- =========================================
+             FORMAT SELECTION
+        ========================================== -->
+
+        <div id="formatSelection">
+
+            <section class="introduction">
+                
+                <p id="formatDescription">
+                    Follow an interactive step-by-step guide
+                </p>
+            </section>
+
+            <section class="guide-options">
+
+                <!-- Interactive guide option -->
+
+                <article class="guide-option">
+
+                    <div class="option-icon" aria-hidden="true">
+                        💻
+                    </div>
+
+                    <h3 id="interactiveTitle">
+                        Interactive Guide
+                    </h3>
+                    
+
+
+                    <button
+                        type="button"
+                        class="guide-button"
+                        onclick="openInteractiveGuide()"
+                        id="interactiveButton"
+                    >
+                        Start Interactive Guide
+                    </button>
+
+                </article>
+
+
+            </section>
+
+            <div class="back-section">
+                <button type="button" class="back-button" data-nav="home.html" id="backButton">← Back to Support Portal</button>
+            </div>
+
+        </div>
+
+        <!-- =========================================
+             INTERACTIVE GUIDE
+        ========================================== -->
+
+        <section
+            class="interactive-guide"
+            id="interactiveGuide"
+        >
+
+            <div class="interactive-heading">
+
+
+                <h2 id="interactiveGuideTitle">
+                    Interactive ECAE Email Guide
+                </h2>
+
+                <p id="interactiveGuideDescription">
+                    Follow the instructions one step at a time.
+                </p>
+
+            </div>
+
+            <!-- Progress -->
+
+            <div class="progress-information">
+                <span id="stepText">Step 1 of 4</span>
+                <span id="progressText">20%</span>
+            </div>
+
+            <div class="progress-bar">
+                <div
+                    class="progress-fill"
+                    id="progressFill"
+                ></div>
+            </div>
+
+            <!-- =====================================
+                 STEP 1
+            ====================================== -->
+
+            <article class="step-card active" data-step="1">
+
+   
+                <span class="step-number">Step 1</span>
+
+ 
+                <h3 id="step1Title">Open the ECAE Website or Portal</h3>
+
+    
+                <ol id="step1List" class="instruction-list">
+       
+                    <li>Open the Emirates College for Advanced Education (ECAE) website.</li>
+        
+                    <li>Click <strong>Login</strong> in the top-right corner.</li>
+        
+                    <li>Select <strong>ECAE Portal</strong>.</li>
+       
+                    <li>You can also open the portal directly using the links below.</li>
+  
+                </ol>
+
+                <div class="step-links">
+
+                    <div class="kiosk-link" data-url="https://www.ecae.ac.ae/en/"></div>
+
+                    <div class="kiosk-link" data-url="https://portal.ecae.ac.ae/"></div>
+
+                </div>
+
+                <div class="navigation-buttons">
+                    <span></span>
+
+                    <button
+                        type="button"
+                        class="next-button"
+                        onclick="showStep(2)"
+                        id="next1"
+                    >
+                        Next
+                    </button>
+                </div>
+
+            </article>
+
+            <!-- =====================================
+                 STEP 2
+            ====================================== -->
+
+
+            <article class="step-card" data-step="2">
+
+   
+                <span class="step-number">Step 2</span>
+
+   
+                <h3 id="step2Title">Sign In and Select Students</h3>
+
+    
+                <ol id="step2List" class="instruction-list">
+                    <li>Sign in using your ECAE username and password.</li>
+                    <li>After signing in, select the <strong>Students</strong> tab.</li>
+                </ol>
+
+   
+                <div id="step2Note" class="information-note">
+                    If you cannot access the portal, reset your password through Office 365 and try again.
+                    <strong>Important:</strong><br>
+                    Students using other corporate devices may need to sign in using the following username format:
+                    <br><br>
+                    <strong>ECAE\StudentID</strong>
+                    <br>
+                    Example:
+                    <strong>ECAE\001164</strong>
+                </div>
+
+    
+                <div class="step-links">
+        
+                    <div class="kiosk-link" data-url="https://www.office.com"></div>
+                </div>
+
+
+                <div class="navigation-buttons">
+
+                    <button
+                        type="button"
+                        class="previous-button"
+                        onclick="showStep(1)"
+                        id="previous2"
+                    >
+                        Previous
+                    </button>
+
+                    <button
+                        type="button"
+                        class="next-button"
+                        onclick="showStep(3)"
+                        id="next2"
+                    >
+                        Next
+                    </button>
+
+                </div>
+
+            </article>
+
+            <!-- =====================================
+                 STEP 3
+            ====================================== -->
+
+           <article class="step-card" data-step="3">
+        
+            <span class="step-number">Step 3</span>
+        
+            <h3 id="step3Title">Locate ECAE Email</h3>
+        
+            <ol id="step3List" class="instruction-list">
+                <li>After selecting the <strong>Students</strong> tab, look at the right-side panel.</li>
+                <li>Find the <strong>Important Links (Internal)</strong> section.</li>
+                <li>Select <strong>ECAE Email</strong>.</li>
+            </ol>
+        
+            <div id="step3Note" class="information-note">
+                ECAE Email is available from the Important Links (Internal) section.
+            </div>
+        
+            <div class="navigation-buttons">
+        
+                <button
+                    type="button"
+                    class="previous-button"
+                    onclick="showStep(2)"
+                    id="previous3"
+                >
+                    Previous
+                </button>
+        
+                <button
+                    type="button"
+                    class="next-button"
+                    onclick="showStep(4)"
+                    id="next3"
+                >
+                    Next
+                </button>
+        
+            </div>
+        
+        </article>
+
+            <!-- =====================================
+                 STEP 4
+            ====================================== -->
+            
+            <article class="step-card" data-step="4">
+            
+                <span class="step-number">Step 4</span>
+            
+                <h3 id="step4Title">Access Your ECAE Email</h3>
+            
+                <ol id="step4List" class="instruction-list">
+                    <li>Select <strong>ECAE Email</strong> from Important Links (Internal).</li>
+                    <li>Sign in using your ECAE credentials.</li>
+                    <li>Open your mailbox.</li>
+                    <li>Use your email account to communicate with faculty and staff and receive important college announcements.</li>
+                </ol>
+            
+                <div id="step4Note" class="information-note">
+                    You can also access your email directly through Outlook Online.
+                </div>
+            
+                <div class="step-links">
+            
+                    <div class="kiosk-link" data-url="https://outlook.office.com/mail/"></div>
+            
+                </div>
+            
+                <div class="navigation-buttons">
+            
+                    <button
+                        type="button"
+                        class="previous-button"
+                        onclick="showStep(3)"
+                        id="previous4"
+                    >
+                        Previous
+                    </button>
+            
+                    <button
+                        type="button"
+                        class="next-button"
+                        onclick="finishGuide()"
+                        id="finishButton"
+                    >
+                        Finish Guide
+                    </button>
+            
+                </div>
+            
+            </article>
+
+            <!-- =====================================
+                 COMPLETION SCREEN
+            ====================================== -->
+
+            <article
+                class="step-card completion-card"
+                id="completionCard"
+            >
+
+                <div
+                    class="completion-icon"
+                    aria-hidden="true"
+                >
+                    ✅
+                </div>
+
+                <h3 id="completionTitle">Guide Complete</h3>
+
+                <p id="completionDescription">
+                    You have reached the end of the ECAE Email
+                    guide.
+                </p>
+
+                <div class="completion-actions">
+
+                    <button
+                        type="button"
+                        class="next-button"
+                        onclick="restartGuide()"
+                        id="restartGuideButton"
+                    >
+                        Restart Guide
+                    </button>
+
+
+                    <button type="button" class="back-button" data-nav="home.html" id="completionBackButton">Back to Support Portal</button>
+
+                </div>
+
+            </article>
+
+        </section>
+
+    </main>
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+
+    <footer>
+        <p>
+            © <span id="currentYear"></span>
+            Student Support Portal
+        </p>
+    </footer>
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script>
+        const totalGuideSteps = 4;
+
+        function openInteractiveGuide() {
+            document.getElementById(
+                "formatSelection"
+            ).style.display = "none";
+
+            document.getElementById(
+                "interactiveGuide"
+            ).classList.add("visible");
+
+            showStep(1);
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+        function returnToGuideOptions() {
+            document.getElementById(
+                "interactiveGuide"
+            ).classList.remove("visible");
+
+            document.getElementById(
+                "formatSelection"
+            ).style.display = "block";
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+        function showStep(stepNumber) {
+            const cards = document.querySelectorAll(
+                ".step-card"
+            );
+
+            cards.forEach(function (card) {
+                card.classList.remove("active");
+            });
+
+            const selectedStep = document.querySelector(
+                '.step-card[data-step="' +
+                stepNumber +
+                '"]'
+            );
+
+            if (selectedStep) {
+                selectedStep.classList.add("active");
+            }
+
+            const progress = Math.round(
+                (stepNumber / totalGuideSteps) * 100
+            );
+
+            document.getElementById(
+                "stepText"
+            ).textContent =
+                "Step " +
+                stepNumber +
+                " of " +
+                totalGuideSteps;
+
+            document.getElementById(
+                "progressText"
+            ).textContent =
+                progress + "%";
+
+            document.getElementById(
+                "progressFill"
+            ).style.width =
+                progress + "%";
+
+            document.getElementById(
+                "interactiveGuide"
+            ).scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+
+        function finishGuide() {
+            const cards = document.querySelectorAll(
+                ".step-card"
+            );
+
+            cards.forEach(function (card) {
+                card.classList.remove("active");
+            });
+
+            document.getElementById(
+                "completionCard"
+            ).classList.add("active");
+
+            document.getElementById(
+                "stepText"
+            ).textContent =
+                "Guide completed";
+
+            document.getElementById(
+                "progressText"
+            ).textContent =
+                "100%";
+
+            document.getElementById(
+                "progressFill"
+            ).style.width =
+                "100%";
+
+            document.getElementById(
+                "interactiveGuide"
+            ).scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+
+        function restartGuide() {
+            showStep(1);
+        }
+
+        document.getElementById(
+            "currentYear"
+        ).textContent =
+            new Date().getFullYear();
+            function setLanguage(lang){
+                
+                if(lang==="ar"){
+                
+                document.documentElement.lang="ar";
+                document.documentElement.dir="rtl";
+                
+                document.getElementById("pageTitle").textContent=
+                "بريد ECAE الإلكتروني";
+                
+                document.getElementById("pageDescription").textContent=
+                "عرض دليل الدعم.";
+                
+                
+                document.getElementById("formatDescription").textContent=
+                "اتبع الدليل التفاعلي خطوة بخطوة .";
+                
+                document.getElementById("interactiveTitle").textContent=
+                "الدليل التفاعلي";
+                
+                document.getElementById("interactiveButton").textContent=
+                "ابدأ الدليل التفاعلي";
+                
+                
+                document.getElementById("backButton").textContent=
+                "العودة إلى بوابة الدعم";
+   
+                document.getElementById("interactiveGuideTitle").textContent=
+                "الدليل التفاعلي لبريد ECAE الإلكتروني";
+                
+                document.getElementById("interactiveGuideDescription").textContent=
+                "اتبع التعليمات خطوة بخطوة.";
+                
+                document.getElementById("step1Title").textContent=
+                "فتح موقع أو بوابة ECAE";
+                
+                document.getElementById("step2Title").textContent=
+                "تسجيل الدخول واختيار الطلاب";
+                
+                document.getElementById("step3Title").textContent=
+                "العثور على بريد ECAE";
+                
+                document.getElementById("step4Title").textContent=
+                "الوصول إلى بريد ECAE";
+                
+                document.getElementById("step1List").innerHTML=`
+                <li>افتح موقع كلية الإمارات للتطوير التربوي أو البوابة الإلكترونية.</li>
+                <li>اضغط على تسجيل الدخول.</li>
+                <li>اختر بوابة ECAE.</li>
+                <li>يمكنك أيضاً استخدام الروابط المباشرة.</li>
+                `;
+                
+                document.getElementById("step2List").innerHTML=`
+                <li>سجل الدخول باستخدام اسم المستخدم وكلمة المرور الخاصة بك.</li>
+                <li>اختر تبويب الطلاب.</li>
+                `;
+                
+                document.getElementById("step2Note").innerHTML=`
+                إذا لم تتمكن من الوصول إلى البوابة فأعد تعيين كلمة المرور ثم حاول مرة أخرى.<br><br>
+                <strong>مهم:</strong><br>
+                قد تحتاج بعض الأجهزة إلى استخدام:<br><br>
+                <strong>ECAE\\StudentID</strong><br>
+                مثال:<br>
+                <strong>ECAE\\001164</strong>
+                `;
+                
+                document.getElementById("step3List").innerHTML=`
+                <li>بعد اختيار تبويب الطلاب انظر إلى الجانب الأيمن.</li>
+                <li>ابحث عن قسم الروابط المهمة الداخلية.</li>
+                <li>اختر بريد ECAE.</li>
+                `;
+                
+                document.getElementById("step3Note").innerHTML=`
+                يمكن الوصول إلى بريد ECAE من قسم الروابط المهمة الداخلية.
+                `;
+                
+                document.getElementById("step4List").innerHTML=`
+                <li>اختر بريد ECAE من قسم الروابط المهمة الداخلية.</li>
+                <li>قم بتسجيل الدخول باستخدام بيانات ECAE الخاصة بك.</li>
+                <li>افتح صندوق البريد الخاص بك.</li>
+                <li>استخدم البريد الإلكتروني للتواصل مع أعضاء الهيئة الأكاديمية واستلام الإعلانات المهمة.</li>
+                `;
+                
+                document.getElementById("step4Note").innerHTML=`
+                يمكنك أيضاً الوصول إلى بريدك مباشرة عبر Outlook Online.
+                `;
+                
+                document.getElementById("completionTitle").textContent=
+                "اكتمل الدليل";
+                
+                document.getElementById("completionDescription").textContent=
+                "لقد وصلت إلى نهاية دليل بريد ECAE الإلكتروني.";
+                
+                document.getElementById("restartGuideButton").textContent=
+                "إعادة تشغيل الدليل";
+                
+                
+                document.getElementById("completionBackButton").textContent=
+                "العودة إلى بوابة الدعم";
+                
+                document.getElementById("next1").textContent="التالي";
+                document.getElementById("next2").textContent="التالي";
+                document.getElementById("next3").textContent="التالي";
+                
+                document.getElementById("previous2").textContent="السابق";
+                document.getElementById("previous3").textContent="السابق";
+                document.getElementById("previous4").textContent="السابق";
+                
+                document.getElementById("finishButton").textContent="إنهاء الدليل";
+                
+                }else{
+                
+                document.documentElement.lang="en";
+                document.documentElement.dir="ltr";
+                
+                document.getElementById("pageTitle").textContent=
+                "ECAE Email";
+                
+                document.getElementById("pageDescription").textContent=
+                "View this support guide.";
+                
+                
+                document.getElementById("formatDescription").textContent=
+                "Follow an interactive step-by-step guide.";
+                
+                document.getElementById("interactiveTitle").textContent=
+                "Interactive Guide";
+                
+                document.getElementById("interactiveButton").textContent=
+                "Start Interactive Guide";
+                
+
+                document.getElementById("backButton").textContent=
+                "← Back to Support Portal";
+                
+
+                
+                document.getElementById("interactiveGuideTitle").textContent=
+                "Interactive ECAE Email Guide";
+                
+                document.getElementById("interactiveGuideDescription").textContent=
+                "Follow the instructions one step at a time.";
+                
+                document.getElementById("step1Title").textContent=
+                "Open the ECAE Website or Portal";
+                
+                document.getElementById("step2Title").textContent=
+                "Sign In and Select Students";
+                
+                document.getElementById("step3Title").textContent=
+                "Locate ECAE Email";
+                
+                document.getElementById("step4Title").textContent=
+                "Access Your ECAE Email";
+                
+                document.getElementById("step1List").innerHTML=`
+                <li>Open the Emirates College for Advanced Education (ECAE) website.</li>
+                <li>Click Login in the top-right corner.</li>
+                <li>Select ECAE Portal.</li>
+                <li>You can also use the direct links below.</li>
+                `;
+                
+                document.getElementById("step2List").innerHTML=`
+                <li>Sign in using your ECAE username and password.</li>
+                <li>Select the Students tab.</li>
+                `;
+                
+                document.getElementById("step2Note").innerHTML=`
+                If you cannot access the portal, reset your password and try again.<br><br>
+                <strong>Important:</strong><br>
+                Use the following format if needed:<br><br>
+                <strong>ECAE\\StudentID</strong><br>
+                Example:<br>
+                <strong>ECAE\\001164</strong>
+                `;
+                
+                document.getElementById("step3List").innerHTML=`
+                <li>After selecting Students, look at the right-side panel.</li>
+                <li>Locate the Important Links (Internal) section.</li>
+                <li>Select ECAE Email.</li>
+                `;
+                
+                document.getElementById("step3Note").innerHTML=`
+                ECAE Email is available from the Important Links (Internal) section.
+                `;
+                
+                document.getElementById("step4List").innerHTML=`
+                <li>Select ECAE Email from Important Links (Internal).</li>
+                <li>Sign in using your ECAE credentials.</li>
+                <li>Open your mailbox.</li>
+                <li>Use your email to communicate with faculty and receive important college announcements.</li>
+                `;
+                
+                document.getElementById("step4Note").innerHTML=`
+                You can also access your email directly through Outlook Online.
+                `;
+                
+                document.getElementById("completionTitle").textContent=
+                "Guide Complete";
+                
+                document.getElementById("completionDescription").textContent=
+                "You have reached the end of the ECAE Email guide.";
+                
+                document.getElementById("restartGuideButton").textContent=
+                "Restart Guide";
+                
+
+                
+                document.getElementById("completionBackButton").textContent=
+                "Back to Support Portal";
+                
+                document.getElementById("next1").textContent="Next";
+                document.getElementById("next2").textContent="Next";
+                document.getElementById("next3").textContent="Next";
+                
+                document.getElementById("previous2").textContent="Previous";
+                document.getElementById("previous3").textContent="Previous";
+                document.getElementById("previous4").textContent="Previous";
+                
+                document.getElementById("finishButton").textContent="Finish Guide";
+                
+                }
+                
+                localStorage.setItem("language",lang);
+                
+                }
+                
+                window.addEventListener("load",function(){
+                
+                const savedLanguage=
+                localStorage.getItem("language") || "en";
+                
+                setLanguage(savedLanguage);
+                
+                });
+    </script>
+
+    <script src="kiosk/qrcode.js"></script>
+    <script src="kiosk/kiosk.js"></script>
+</body>
+
+</html>

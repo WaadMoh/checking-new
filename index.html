@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#0034A8">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+    <title>Student IT Help</title>
+    <link rel="stylesheet" href="kiosk/shell.css">
+</head>
+<body>
+
+    <!-- The app runs inside this frame. The frame cannot open pop-ups, downloads or navigate this page. -->
+    <iframe id="app" class="app-frame" title="Student IT Help" sandbox="allow-scripts allow-same-origin"></iframe>
+
+    <!-- Start screen: shown until the kiosk is in full screen -->
+    <div class="start-screen" id="startScreen" hidden>
+        <div class="start-card">
+            <img src="Logoc.png" alt="Emirates College for Advanced Education" class="start-logo" draggable="false">
+            <h1>Student IT Help</h1>
+            <p class="start-ar" lang="ar" dir="rtl">بوابة الدعم الذاتي للطلبة</p>
+            <div class="start-tap" aria-hidden="true">👆</div>
+            <p class="start-cta">Tap anywhere to start</p>
+            <p class="start-cta" lang="ar" dir="rtl">اضغط في أي مكان للبدء</p>
+        </div>
+    </div>
+
+    <!-- Idle warning -->
+    <div class="modal-backdrop" id="idleModal" hidden>
+        <div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="idleTitle">
+            <div class="modal-icon" aria-hidden="true">⏳</div>
+            <h2 id="idleTitle">Are you still there?</h2>
+            <p lang="ar" dir="rtl" class="modal-ar">هل ما زلت هنا؟</p>
+            <p>The screen returns to the start in <strong id="idleCount">15</strong> seconds to protect your privacy.</p>
+            <p lang="ar" dir="rtl" class="modal-ar">ستعود الشاشة إلى البداية خلال <strong id="idleCountAr">15</strong> ثانية لحماية خصوصيتك.</p>
+            <button type="button" class="btn btn-primary btn-wide" id="idleStay">I'm still here <span lang="ar">/ ما زلت هنا</span></button>
+        </div>
+    </div>
+
+    <!-- Staff PIN pad -->
+    <div class="modal-backdrop" id="pinModal" hidden>
+        <div class="modal pin-modal" role="dialog" aria-modal="true" aria-labelledby="pinTitle">
+            <div class="modal-icon" aria-hidden="true">🔒</div>
+            <h2 id="pinTitle">Staff exit</h2>
+            <p class="pin-help">Enter the staff PIN to leave kiosk mode.</p>
+            <p class="pin-help" lang="ar" dir="rtl">أدخل الرقم السري للموظفين للخروج من وضع الكشك.</p>
+            <div class="pin-dots" id="pinDots" aria-hidden="true"></div>
+            <p class="pin-status" id="pinStatus" role="status" aria-live="assertive"></p>
+            <div class="pin-pad" id="pinPad">
+                <button type="button" data-key="1">1</button>
+                <button type="button" data-key="2">2</button>
+                <button type="button" data-key="3">3</button>
+                <button type="button" data-key="4">4</button>
+                <button type="button" data-key="5">5</button>
+                <button type="button" data-key="6">6</button>
+                <button type="button" data-key="7">7</button>
+                <button type="button" data-key="8">8</button>
+                <button type="button" data-key="9">9</button>
+                <button type="button" data-key="clear" class="pin-fn">Clear</button>
+                <button type="button" data-key="0">0</button>
+                <button type="button" data-key="back" class="pin-fn" aria-label="Delete">⌫</button>
+            </div>
+            <button type="button" class="btn btn-ghost btn-wide" id="pinCancel">Cancel <span lang="ar">/ إلغاء</span></button>
+        </div>
+    </div>
+
+    <!-- Unlocked bar for IT staff -->
+    <div class="admin-bar" id="adminBar" hidden>
+        <span class="admin-text">🔓 Kiosk unlocked. It locks again in <strong id="relockCount"></strong>.</span>
+        <div class="admin-actions">
+            <button type="button" class="btn btn-light" id="adminReload">Reload content</button>
+            <button type="button" class="btn btn-light" id="adminFullyExit" hidden>Close kiosk browser</button>
+            <button type="button" class="btn btn-primary" id="adminRelock">Lock kiosk now</button>
+        </div>
+    </div>
+
+    <script src="kiosk/config.js"></script>
+    <script src="kiosk/pin.js"></script>
+    <script src="kiosk/shell.js"></script>
+</body>
+</html>

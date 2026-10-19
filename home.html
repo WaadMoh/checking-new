@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+    <title>Student IT Help</title>
+    <link rel="stylesheet" href="kiosk/kiosk.css">
+</head>
+<body class="kiosk-home-page">
+
+    <header class="home-header">
+        <div class="home-brand">
+            <div class="home-logo"><img src="Logoc.png" alt="Emirates College for Advanced Education" draggable="false"></div>
+            <div class="home-titles">
+                <h1 data-t="title">Student IT Help</h1>
+                <p data-t="subtitle">Step-by-step help for ECAE student systems and services.</p>
+            </div>
+        </div>
+        <div class="home-tools">
+            <div class="lang-toggle" role="group" aria-label="Language">
+                <button type="button" data-lang="en" lang="en">English</button>
+                <button type="button" data-lang="ar" lang="ar">العربية</button>
+            </div>
+            <button type="button" class="staff-button" data-kiosk-exit aria-label="Staff exit">
+                <span aria-hidden="true">🔒</span> <span data-t="staff">Staff</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="home-main">
+
+        <section class="search-panel" aria-labelledby="searchLabel">
+            <label id="searchLabel" for="searchInput" class="search-title" data-t="searchLabel">What do you need help with?</label>
+            <div class="search-box">
+                <span class="search-icon" aria-hidden="true">🔍</span>
+                <input type="search" id="searchInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" placeholder="Try: Wi-Fi, password, email, grades">
+                <button type="button" class="search-clear" id="searchClear" aria-label="Clear search" hidden>✕</button>
+            </div>
+            <div class="chips" id="chips" role="group" aria-label="Categories"></div>
+        </section>
+
+        <section class="notice" id="passwordNotice" aria-labelledby="noticeTitle">
+            <div class="notice-icon" aria-hidden="true">🔐</div>
+            <div class="notice-text">
+                <h2 id="noticeTitle" data-t="noticeTitle">Password expired?</h2>
+                <p data-t="noticeText">ECAE passwords expire every 60 days. Update yours before you sign in to ECAE systems.</p>
+            </div>
+            <div class="notice-actions">
+                <button type="button" class="btn btn-primary" data-nav="PasswordChanging.html" data-t="noticeButton">Change my password</button>
+                <button type="button" class="btn btn-ghost" id="noticeDismiss" data-t="noticeDismiss">Not now</button>
+            </div>
+        </section>
+
+        <p class="result-count" id="resultCount" aria-live="polite"></p>
+
+        <div class="tile-grid" id="tileGrid"></div>
+
+        <div class="empty-state" id="emptyState" hidden>
+            <div class="empty-icon" aria-hidden="true">🤔</div>
+            <h2 data-t="emptyTitle">No guide found</h2>
+            <p data-t="emptyText">Try a shorter word such as "email", "grades", "Wi-Fi" or "attendance", or ask the IT Service Desk below.</p>
+        </div>
+
+        <section class="help-panel" aria-labelledby="helpTitle">
+            <h2 id="helpTitle" data-t="helpTitle">Still need help?</h2>
+            <div class="help-grid">
+                <div class="help-card">
+                    <h3 data-t="hubTitle">Log a request</h3>
+                    <div class="kiosk-link" data-url="https://esm.gov.ae/servicehub/"><span class="kiosk-link-label" data-t="hubLabel">IT Service Hub</span></div>
+                </div>
+                <div class="help-card">
+                    <h3 data-t="mailTitle">Email IT Help</h3>
+                    <div class="kiosk-link" data-url="mailto:ithelp@ecae.ac.ae"><span class="kiosk-link-label" data-t="mailLabel">IT Help Desk</span></div>
+                </div>
+                <div class="help-card">
+                    <h3 data-t="callTitle">Call us</h3>
+                    <div class="kiosk-link" data-url="tel:+97125099911" data-display="02 509 9911"><span class="kiosk-link-label" data-t="callLabel">IT Service Desk</span></div>
+                </div>
+                <div class="help-card help-info">
+                    <h3 data-t="visitTitle">Visit us</h3>
+                    <p><strong data-t="adCampus">Abu Dhabi Campus</strong><br><span data-t="adRoom">Ground Floor, Room G17</span></p>
+                    <p><strong data-t="aaCampus">Al Ain and Ajman Campus</strong><br><span data-t="aaRoom">Support available in classes (online)</span></p>
+                    <h3 class="hours-title" data-t="hoursTitle">Working hours</h3>
+                    <p><strong data-t="monThu">Monday to Thursday</strong><br><span data-t="monThuHours">8:00 AM to 9:00 PM</span></p>
+                    <p><strong data-t="fri">Friday</strong><br><span data-t="friHours">7:30 AM to 12:00 PM</span></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="home-footer">
+        <span>© <span id="year"></span> <span data-t="footer">Emirates College for Advanced Education. Student IT Help.</span></span>
+    </footer>
+
+    <script>
+        (function () {
+            'use strict';
+
+            var CATEGORIES = [
+                { id: 'all', en: 'All guides', ar: 'جميع الأدلة' },
+                { id: 'access', en: 'Accounts and access', ar: 'الحسابات والدخول' },
+                { id: 'learning', en: 'Learning', ar: 'التعلّم' },
+                { id: 'records', en: 'Records and grades', ar: 'السجلات والدرجات' },
+                { id: 'requests', en: 'Requests and feedback', ar: 'الطلبات والملاحظات' }
+            ];
+
+            var GUIDES = [
+                { page: 'PasswordChanging.html', cat: 'access', icon: '🔑', en: 'Change your password (Office 365)', ar: 'تغيير كلمة المرور في Office 365', k: 'password reset expired forgot كلمة المرور نسيت انتهت' },
+                { page: 'WIFI.html', cat: 'access', icon: '📶', en: 'Wi-Fi connection', ar: 'الاتصال بشبكة الواي فاي', k: 'wifi wi-fi wireless internet network byod iphone android واي فاي انترنت شبكة' },
+                { page: 'Email.html', cat: 'access', icon: '✉️', en: 'ECAE email', ar: 'البريد الإلكتروني ECAE', k: 'email mail outlook inbox بريد ايميل' },
+                { page: 'Office_365.html', cat: 'access', icon: '🧩', en: 'ECAE Office 365', ar: 'ECAE مايكروسوفت 365', k: 'office 365 microsoft word excel teams download install اوفيس مايكروسوفت تحميل' },
+                { page: 'Account.html', cat: 'access', icon: '🛡️', en: 'Account authentication (MFA)', ar: 'دليل توثيق الحساب', k: 'mfa authenticator authentication verify two factor 2fa توثيق تحقق' },
+                { page: 'ECAE_Official.html', cat: 'access', icon: '🌐', en: 'ECAE website login problem', ar: 'مشكلة تسجيل الدخول إلى الموقع الرسمي لـ ECAE', k: 'website login sign in portal موقع تسجيل الدخول' },
+                { page: 'Kottab.html', cat: 'learning', icon: '📚', en: 'Kottab learning system', ar: 'نظام إدارة التعلم كتاب', k: 'kottab lms moodle courses كتاب مقررات' },
+                { page: 'Library.html', cat: 'learning', icon: '📖', en: 'ECAE Library', ar: 'مكتبة ECAE', k: 'library books database مكتبة كتب' },
+                { page: 'Timetable.html', cat: 'learning', icon: '🕒', en: 'My timetable', ar: 'جدولي الدراسي', k: 'timetable schedule classes جدول' },
+                { page: 'Calendar.html', cat: 'learning', icon: '📅', en: 'ECAE academic calendar', ar: 'تقويم ECAE', k: 'calendar dates holidays تقويم' },
+                { page: 'Academic_Programs.html', cat: 'learning', icon: '🎓', en: 'Academic programs', ar: 'البرامج الأكاديمية', k: 'programs programmes degree majors برامج' },
+                { page: 'Research.html', cat: 'learning', icon: '🔬', en: 'Research grant application access', ar: 'تقديم طلب منحة بحثية', k: 'research grant application بحث منحة' },
+                { page: 'Portal.html', cat: 'records', icon: '💻', en: 'Student Information System (SIS) portal', ar: 'بوابة نظام معلومات الطالب', k: 'sis portal student information بوابة' },
+                { page: 'Grades.html', cat: 'records', icon: '🏅', en: 'My grades', ar: 'درجاتي', k: 'grades marks results درجات نتائج' },
+                { page: 'Attendance.html', cat: 'records', icon: '📋', en: 'My attendance and advisor', ar: 'الحضور والمرشد الأكاديمي', k: 'attendance advisor absence حضور مرشد' },
+                { page: 'Unofficial_Transcript.html', cat: 'records', icon: '📑', en: 'Unofficial transcript', ar: 'كشف درجات غير رسمي', k: 'transcript unofficial كشف درجات' },
+                { page: 'Request.html', cat: 'records', icon: '📨', en: 'Request an official transcript', ar: 'طلب كشف درجات', k: 'transcript official request كشف درجات طلب' },
+                { page: 'Grade.html', cat: 'records', icon: '📊', en: 'Grade appeal', ar: 'التظلم على الدرجات', k: 'grade appeal تظلم' },
+                { page: 'Registration.html', cat: 'requests', icon: '📄', en: 'Registration letter request', ar: 'طلب رسالة تسجيل', k: 'registration letter enrolment certificate رسالة تسجيل' },
+                { page: 'Absence.html', cat: 'requests', icon: '📝', en: 'Absence support documents', ar: 'مستندات دعم الغياب', k: 'absence excuse medical sick غياب عذر' },
+                { page: 'eClearance.html', cat: 'requests', icon: '✅', en: 'eClearance and letter of completion', ar: 'إخلاء الطرف ورسالة إتمام الدراسة', k: 'eclearance clearance completion graduation إخلاء طرف تخرج' },
+                { page: 'Documents.html', cat: 'requests', icon: '🗂️', en: 'Institutional documents directory', ar: 'دليل الوثائق المؤسسية للطلاب', k: 'documents policies forms handbook وثائق سياسات نماذج' },
+                { page: 'FeedbackComplain.html', cat: 'requests', icon: '💬', en: 'Feedback or complaint', ar: 'ملاحظات أو شكوى', k: 'feedback complaint suggestion شكوى ملاحظات اقتراح' },
+                { page: 'Feedback_Follow-Up.html', cat: 'requests', icon: '🔎', en: 'Feedback follow-up', ar: 'متابعة الملاحظات', k: 'follow up status feedback متابعة' }
+            ];
+
+            var TEXT = {
+                en: {
+                    title: 'Student IT Help', subtitle: 'Step-by-step help for ECAE student systems and services.',
+                    staff: 'Staff', searchLabel: 'What do you need help with?', searchPlaceholder: 'Try: Wi-Fi, password, email, grades',
+                    noticeTitle: 'Password expired?', noticeText: 'ECAE passwords expire every 60 days. Update yours before you sign in to ECAE systems.',
+                    noticeButton: 'Change my password', noticeDismiss: 'Not now',
+                    emptyTitle: 'No guide found', emptyText: 'Try a shorter word such as "email", "grades", "Wi-Fi" or "attendance", or ask the IT Service Desk below.',
+                    helpTitle: 'Still need help?', hubTitle: 'Log a request', hubLabel: 'IT Service Hub', mailTitle: 'Email IT Help', mailLabel: 'IT Help Desk',
+                    callTitle: 'Call us', callLabel: 'IT Service Desk', visitTitle: 'Visit us',
+                    adCampus: 'Abu Dhabi Campus', adRoom: 'Ground Floor, Room G17', aaCampus: 'Al Ain and Ajman Campus', aaRoom: 'Support available in classes (online)',
+                    hoursTitle: 'Working hours', monThu: 'Monday to Thursday', monThuHours: '8:00 AM to 9:00 PM', fri: 'Friday', friHours: '7:30 AM to 12:00 PM',
+                    footer: 'Emirates College for Advanced Education. Student IT Help.',
+                    open: 'Open guide', results: function (n) { return n === 1 ? '1 guide found' : n + ' guides found'; }
+                },
+                ar: {
+                    title: 'بوابة الدعم الذاتي للطلبة', subtitle: 'إرشادات خطوة بخطوة لأنظمة وخدمات الطلبة في الكلية.',
+                    staff: 'الموظفون', searchLabel: 'بماذا يمكننا مساعدتك؟', searchPlaceholder: 'مثال: واي فاي، كلمة المرور، البريد، الدرجات',
+                    noticeTitle: 'هل انتهت صلاحية كلمة المرور؟', noticeText: 'تنتهي صلاحية كلمات مرور الكلية كل 60 يومًا. حدّث كلمة المرور قبل تسجيل الدخول إلى أنظمة الكلية.',
+                    noticeButton: 'تغيير كلمة المرور', noticeDismiss: 'ليس الآن',
+                    emptyTitle: 'لم يتم العثور على دليل', emptyText: 'جرّب كلمة أقصر مثل "البريد" أو "الدرجات" أو "واي فاي" أو "الحضور"، أو تواصل مع مكتب خدمات تقنية المعلومات أدناه.',
+                    helpTitle: 'هل تحتاج إلى مساعدة إضافية؟', hubTitle: 'تقديم طلب', hubLabel: 'منصة خدمات تقنية المعلومات', mailTitle: 'راسل الدعم الفني', mailLabel: 'مكتب الدعم الفني',
+                    callTitle: 'اتصل بنا', callLabel: 'مكتب خدمات تقنية المعلومات', visitTitle: 'زرنا',
+                    adCampus: 'حرم أبوظبي', adRoom: 'الطابق الأرضي، الغرفة G17', aaCampus: 'حرم العين وعجمان', aaRoom: 'الدعم متوفر داخل القاعات الدراسية (عن بُعد)',
+                    hoursTitle: 'ساعات العمل', monThu: 'من الإثنين إلى الخميس', monThuHours: '8:00 صباحًا إلى 9:00 مساءً', fri: 'الجمعة', friHours: '7:30 صباحًا إلى 12:00 ظهرًا',
+                    footer: 'كلية الإمارات للتطوير التربوي. بوابة الدعم الذاتي للطلبة.',
+                    open: 'فتح الدليل', results: function (n) { return n === 1 ? 'تم العثور على دليل واحد' : 'عدد الأدلة: ' + n; }
+                }
+            };
+
+            var state = { lang: 'en', cat: 'all', query: '' };
+            var grid = document.getElementById('tileGrid');
+            var chips = document.getElementById('chips');
+            var input = document.getElementById('searchInput');
+            var clearBtn = document.getElementById('searchClear');
+
+            function norm(s) {
+                return (s || '').toLowerCase()
+                    .replace(/[ً-ٟـ]/g, '')
+                    .replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي')
+                    .replace(/[-‑_]/g, ' ').replace(/\s+/g, ' ').trim();
+            }
+
+            function buildTiles() {
+                grid.innerHTML = '';
+                GUIDES.forEach(function (g) {
+                    var b = document.createElement('button');
+                    b.type = 'button';
+                    b.className = 'tile';
+                    b.setAttribute('data-nav', g.page);
+                    b.setAttribute('data-cat', g.cat);
+                    b.setAttribute('data-search', norm(g.en + ' ' + g.ar + ' ' + g.k));
+                    b.innerHTML = '<span class="tile-icon" aria-hidden="true"></span><span class="tile-title"></span><span class="tile-cta"><span class="tile-cta-text"></span><span class="tile-arrow" aria-hidden="true">→</span></span>';
+                    b.querySelector('.tile-icon').textContent = g.icon;
+                    b._guide = g;
+                    grid.appendChild(b);
+                });
+            }
+
+            function buildChips() {
+                chips.innerHTML = '';
+                CATEGORIES.forEach(function (c) {
+                    var b = document.createElement('button');
+                    b.type = 'button';
+                    b.className = 'chip';
+                    b.setAttribute('data-cat', c.id);
+                    b._cat = c;
+                    b.addEventListener('click', function () {
+                        state.cat = c.id;
+                        update();
+                    });
+                    chips.appendChild(b);
+                });
+            }
+
+            function render() {
+                var T = TEXT[state.lang];
+                document.documentElement.lang = state.lang;
+                document.documentElement.dir = state.lang === 'ar' ? 'rtl' : 'ltr';
+                document.querySelectorAll('[data-t]').forEach(function (el) {
+                    var v = T[el.getAttribute('data-t')];
+                    if (typeof v === 'string') el.textContent = v;
+                });
+                input.placeholder = T.searchPlaceholder;
+                document.querySelectorAll('.lang-toggle button').forEach(function (b) {
+                    b.setAttribute('aria-pressed', b.getAttribute('data-lang') === state.lang ? 'true' : 'false');
+                });
+                Array.prototype.forEach.call(chips.children, function (b) {
+                    b.textContent = b._cat[state.lang];
+                });
+                Array.prototype.forEach.call(grid.children, function (b) {
+                    b.querySelector('.tile-title').textContent = b._guide[state.lang];
+                    b.querySelector('.tile-cta-text').textContent = T.open;
+                    b.querySelector('.tile-arrow').textContent = state.lang === 'ar' ? '←' : '→';
+                });
+                update();
+            }
+
+            function update() {
+                var q = norm(state.query);
+                var words = q ? q.split(' ') : [];
+                var shown = 0;
+                Array.prototype.forEach.call(grid.children, function (b) {
+                    var hay = b.getAttribute('data-search');
+                    var inCat = q || state.cat === 'all' || b.getAttribute('data-cat') === state.cat;
+                    var match = words.every(function (w) { return hay.indexOf(w) !== -1; });
+                    var show = inCat && match;
+                    b.hidden = !show;
+                    if (show) shown++;
+                });
+                Array.prototype.forEach.call(chips.children, function (b) {
+                    var active = !q && b.getAttribute('data-cat') === state.cat;
+                    b.setAttribute('aria-pressed', active ? 'true' : 'false');
+                });
+                clearBtn.hidden = !q;
+                document.getElementById('emptyState').hidden = shown !== 0;
+                document.getElementById('resultCount').textContent = q ? TEXT[state.lang].results(shown) : '';
+            }
+
+            function setLanguage(lang) {
+                state.lang = lang === 'ar' ? 'ar' : 'en';
+                try { localStorage.setItem('language', state.lang); } catch (e) { /* storage blocked */ }
+                render();
+            }
+
+            input.addEventListener('input', function () {
+                state.query = input.value;
+                update();
+            });
+            input.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') input.blur();
+            });
+            clearBtn.addEventListener('click', function () {
+                input.value = '';
+                state.query = '';
+                update();
+                input.blur();
+            });
+            document.querySelectorAll('.lang-toggle button').forEach(function (b) {
+                b.addEventListener('click', function () { setLanguage(b.getAttribute('data-lang')); });
+            });
+            document.getElementById('noticeDismiss').addEventListener('click', function () {
+                document.getElementById('passwordNotice').hidden = true;
+            });
+
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            var saved = 'en';
+            try { saved = localStorage.getItem('language') || 'en'; } catch (e) { /* storage blocked */ }
+            buildChips();
+            buildTiles();
+            setLanguage(saved);
+        })();
+    </script>
+    <script src="kiosk/qrcode.js"></script>
+    <script src="kiosk/kiosk.js"></script>
+</body>
+</html>

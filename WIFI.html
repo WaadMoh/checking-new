@@ -1,0 +1,1429 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+
+    <title>Wi-Fi Connectivity Guide</title>
+
+    <style>
+        :root {
+            --ecae-blue: #0034A8;
+            --ecae-dark-blue: #00277F;
+            --ecae-light-blue: #EDF3FF;
+            --ecae-teal: #ADEDEA;
+            --background: #F5F7FA;
+            --text-dark: #1F2937;
+            --text-grey: #5B6472;
+            --success: #157347;
+            --white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--background);
+            color: var(--text-dark);
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        /* =========================================
+           HEADER
+        ========================================= */
+
+        .page-header {
+            background: var(--ecae-blue);
+            color: white;
+            padding: 35px 20px;
+        }
+
+        .header-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            width: 92%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .header-text h1 {
+            margin-bottom: 8px;
+            font-size: clamp(28px, 5vw, 40px);
+        }
+
+        .header-text p {
+            line-height: 1.6;
+        }
+
+        .header-logo {
+            flex-shrink: 0;
+            padding: 14px 18px;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-logo img {
+            display: block;
+            width: 185px;
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+        .language-switcher {
+            position: absolute;
+            top: -32px;
+            right: 25px;
+            z-index: 20;
+            display: flex;
+            gap: 8px;
+        }
+        
+        .language-switcher button {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 6px;
+            background: white;
+            color: var(--ecae-blue);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .language-switcher button:hover {
+            background: #EDF3FF;
+        }
+        /* =========================================
+           MAIN CONTENT
+        ========================================= */
+
+        main {
+            width: 92%;
+            max-width: 1000px;
+            margin: 46px auto;
+        }
+
+        .introduction {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .introduction h2 {
+            margin-bottom: 10px;
+            color: var(--ecae-blue);
+            font-size: 29px;
+        }
+
+        .introduction p {
+            color: var(--text-grey);
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           GUIDE OPTIONS
+        ========================================= */
+
+        .guide-options {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .guide-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 650px;
+            min-height: 420px;
+            padding: 50px 40px;
+            border: 1px solid #DCE5F3;
+            border-top: 8px solid var(--ecae-blue);
+            border-radius: 20px;
+            background: white;
+            text-align: center;
+            box-shadow: 0 12px 35px rgba(0, 52, 168, 0.12);
+            transition: all 0.3s ease;
+        }
+        
+        .guide-option:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 45px rgba(0, 52, 168, 0.18);
+        }
+
+
+        .option-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 76px;
+            height: 76px;
+            margin-bottom: 18px;
+            border-radius: 18px;
+            background: var(--ecae-light-blue);
+            font-size: 37px;
+        }
+
+        .guide-option h3 {
+            margin-bottom: 12px;
+            color: var(--ecae-blue);
+            font-size: 22px;
+        }
+
+        .guide-option p {
+            flex-grow: 1;
+            margin-bottom: 22px;
+            color: var(--text-grey);
+            line-height: 1.7;
+        }
+
+        .guide-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 235px;
+            min-height: 49px;
+            padding: 13px 18px;
+            border: 2px solid var(--ecae-blue);
+            border-radius: 9px;
+            background: var(--ecae-blue);
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .guide-button:hover {
+            border-color: var(--ecae-dark-blue);
+            background: var(--ecae-dark-blue);
+        }
+
+
+
+        /* =========================================
+           BACK BUTTON
+        ========================================= */
+
+        .back-section {
+            margin-top: 32px;
+            text-align: center;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 12px 22px;
+            border: 2px solid var(--ecae-blue);
+            border-radius: 9px;
+            background: white;
+            color: var(--ecae-blue);
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .back-button:hover {
+            background: var(--ecae-light-blue);
+        }
+
+
+        /* =========================================
+           INTERACTIVE GUIDE
+        ========================================= */
+
+        .interactive-guide {
+            display: none;
+        }
+
+        .interactive-guide.visible {
+            display: block;
+        }
+
+        .interactive-heading {
+            margin-bottom: 28px;
+            text-align: center;
+        }
+
+        .interactive-heading h2 {
+            margin: 17px 0 8px;
+            color: var(--ecae-blue);
+            font-size: 28px;
+        }
+
+        .interactive-heading p {
+            color: var(--text-grey);
+            line-height: 1.7;
+        }
+
+        .return-button {
+            padding: 11px 18px;
+            border: 2px solid var(--ecae-blue);
+            border-radius: 8px;
+            background: white;
+            color: var(--ecae-blue);
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .return-button:hover {
+            background: var(--ecae-light-blue);
+        }
+
+        /* =========================================
+           PROGRESS BAR
+        ========================================= */
+
+        .progress-information {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 9px;
+            color: var(--ecae-blue);
+            font-weight: 700;
+        }
+
+        .progress-bar {
+            height: 10px;
+            margin-bottom: 24px;
+            border-radius: 20px;
+            background: #DCE5EF;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: var(--ecae-blue);
+            transition: width 0.3s ease;
+        }
+
+        /* =========================================
+           STEP CARDS
+        ========================================= */
+
+        .step-card {
+            display: none;
+            padding: 34px;
+            border: 1px solid #DCE5F3;
+            border-radius: 18px;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0, 52, 168, 0.09);
+        }
+
+        .step-card.active {
+            display: block;
+            animation: showStep 0.35s ease;
+        }
+
+        @keyframes showStep {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .step-number {
+            display: inline-block;
+            padding: 7px 13px;
+            border-radius: 7px;
+            background: var(--ecae-teal);
+            color: #004F4A;
+            font-weight: 700;
+        }
+
+        .step-card h3 {
+            margin: 16px 0 12px;
+            color: var(--ecae-blue);
+            font-size: 24px;
+        }
+
+        .instruction-list {
+            margin: 18px 0;
+            padding-left: 24px;
+        }
+
+        .instruction-list li {
+            margin-bottom: 11px;
+            line-height: 1.75;
+        }
+
+        /* =========================================
+           INFORMATION NOTES
+        ========================================= */
+
+        .information-note {
+            margin: 18px 0;
+            padding: 15px;
+            border-left: 5px solid var(--ecae-blue);
+            border-radius: 8px;
+            background: var(--ecae-light-blue);
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           STEP LINKS
+        ========================================= */
+
+        .step-links {
+            margin-top: 18px;
+        }
+
+        .step-link {
+            display: inline-block;
+            margin: 5px 5px 5px 0;
+            padding: 11px 18px;
+            border: 2px solid var(--ecae-blue);
+            border-radius: 8px;
+            background: var(--ecae-light-blue);
+            color: var(--ecae-blue);
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .step-link:hover {
+            background: #DCE8FF;
+        }
+
+        /* =========================================
+           NAVIGATION BUTTONS
+        ========================================= */
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 26px;
+        }
+
+        .next-button,
+        .previous-button {
+            padding: 12px 19px;
+            border: 2px solid var(--ecae-blue);
+            border-radius: 9px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .next-button {
+            background: var(--ecae-blue);
+            color: white;
+        }
+
+        .next-button:hover {
+            background: var(--ecae-dark-blue);
+        }
+
+        .previous-button {
+            background: white;
+            color: var(--ecae-blue);
+        }
+
+        .previous-button:hover {
+            background: var(--ecae-light-blue);
+        }
+
+        /* =========================================
+           COMPLETION SCREEN
+        ========================================= */
+
+        .completion-card {
+            text-align: center;
+        }
+
+        .completion-icon {
+            margin-bottom: 12px;
+            font-size: 58px;
+        }
+
+        .completion-card h3 {
+            color: var(--success);
+        }
+
+        .completion-card p {
+            line-height: 1.7;
+        }
+
+        .completion-actions {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        footer {
+            margin-top: 50px;
+            padding: 22px;
+            background: var(--ecae-blue);
+            color: white;
+            text-align: center;
+        }
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 700px) {
+            .header-container {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+
+            .header-logo img {
+                width: 160px;
+            }
+
+            .guide-options {
+                grid-template-columns: 1fr;
+            }
+
+            .guide-option {
+                min-height: 300px;
+            }
+
+            .step-card {
+                padding: 25px 19px;
+            }
+
+            .navigation-buttons {
+                flex-direction: column-reverse;
+            }
+
+            .navigation-buttons button {
+                width: 100%;
+            }
+
+            .completion-actions {
+                flex-direction: column;
+            }
+
+            .completion-actions button,
+            .completion-actions a {
+                width: 100%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="kiosk/kiosk.css">
+</head>
+
+<body>
+
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+
+    <header class="page-header">
+        <div class="header-container">
+            <button type="button" class="kiosk-home" data-nav="home.html"><span class="kiosk-home-arrow" aria-hidden="true">←</span> <span data-k="home">Home</span></button>
+            <div class="language-switcher">
+                <button onclick="setLanguage('en')">🇬🇧 English</button>
+                <button onclick="setLanguage('ar')">🇦🇪 العربية</button>
+            </div>
+
+            <div class="header-text">
+                <h1 id="pageTitle">Wi‑Fi Connectivity Guide</h1>
+
+                <p id="pageDescription">
+                    Select your device and follow the Wi-Fi connection instructions
+                    one step at a time.
+                </p>
+            </div>
+
+             <div class="header-logo">
+               <img src="Logoc.png" alt="Emirates College for Advanced Education" draggable="false"></div>
+
+        </div>
+    </header>
+
+    <main>
+
+        <!-- =========================================
+             FORMAT SELECTION
+        ========================================== -->
+
+        <div id="formatSelection">
+
+            <section class="introduction">
+                
+                <p id="formatDescription">
+                    Follow an interactive step-by-step guide
+                </p>
+            </section>
+
+            <section class="guide-options">
+
+                <!-- Interactive guide option -->
+
+                <article class="guide-option">
+
+                    <div class="option-icon" aria-hidden="true">
+                        💻
+                    </div>
+
+                    <h3 id="interactiveTitle">
+                        Interactive Guide
+                    </h3>
+                    
+
+
+                    <button
+                        type="button"
+                        class="guide-button"
+                        onclick="openInteractiveGuide()"
+                        id="interactiveButton"
+                    >
+                        Start Interactive Guide
+                    </button>
+
+                </article>
+
+
+            </section>
+
+            <div class="back-section">
+                <button type="button" class="back-button" data-nav="home.html" id="backButton">← Back to Support Portal</button>
+            </div>
+
+        </div>
+
+
+        <!-- =========================================
+             INTERACTIVE GUIDE
+        ========================================== -->
+
+        <section
+            class="interactive-guide"
+            id="interactiveGuide"
+        >
+
+            <div class="interactive-heading">
+
+
+                <h2 id="interactiveGuideTitle">Interactive Wi-Fi Connectivity Guide</h2>
+
+                <p id="interactiveGuideDescription">
+                    Follow the instructions one step at a time.
+                </p>
+
+            </div>
+
+            <!-- Progress -->
+
+            <div class="progress-information">
+                <span id="stepText">Choose Your Device</span>
+                <span id="progressText">0%
+                </span>
+            </div>
+
+            <div class="progress-bar">
+                <div
+                    class="progress-fill"
+                    id="progressFill"
+                ></div>
+            </div>
+
+            <!-- =====================================
+                 DEVICE SELECTION
+            ====================================== -->
+            
+            <article class="step-card active" data-step="1">
+            
+                <span class="step-number">Device Selection</span>
+            
+                <h3 id="deviceSelectionTitle">Which Device Are You Using?</h3>
+            
+                <ol class="instruction-list" id="deviceSelectionList">
+                    <li>Select the type of device you want to connect.</li>
+                    <li>You will only see the instructions for your selected device.</li>
+                </ol>
+                            
+                <div class="information-note" id="deviceSelectionNote">
+                    The Wi-Fi settings are different for IOS and Android devices.
+                </div>
+            
+                <div class="navigation-buttons">
+            
+                    <button
+                        type="button"
+                        class="next-button"
+                        onclick="showWifiStep(2, 'iOS Step 1 of 3', 33)"
+                        id="iosButton"
+                    >
+                        IOS
+                    </button>
+            
+                    <button
+                        type="button"
+                        class="next-button"
+                        onclick="showWifiStep(5, 'Android Step 1 of 3', 33)"
+                        id="androidButton"
+                    >
+                        Android
+                    </button>
+            
+                </div>
+            
+            </article>
+            
+            <!-- =====================================
+                 iOS STEP 1
+            ====================================== -->
+            
+            <article class="step-card" data-step="2">
+            
+                <span class="step-number" id="step1Number">iOS Step 1</span>
+            
+                <h3 id="step1Title">Open Wi-Fi Settings</h3>
+            
+                <ol class="instruction-list" id="step1List">
+                    <li>Open <strong>Settings</strong> on your IOS.</li>
+                    <li>Select <strong>Wi-Fi</strong>.</li>
+                    <li>Select <strong>ECAE-BYOD</strong> from the available networks.</li>
+                </ol>
+            
+                <div class="navigation-buttons">
+            
+                    <button
+                        type="button"
+                        class="previous-button"
+                        onclick="showDeviceSelection()"
+                        id="chooseDeviceIOS"
+                    >
+                        Choose Another Device
+                    </button>
+            
+                    <button
+                        type="button"
+                        class="next-button"
+                        onclick="showWifiStep(3, 'iOS Step 2 of 3', 67)"
+                        id="next1"
+                    >
+                        Next
+                    </button>
+            
+                </div>
+            
+            </article>
+            
+            <!-- =====================================
+                 iOS STEP 2
+            ====================================== -->
+            
+            <article class="step-card" data-step="3">
+            
+                <span class="step-number" id="step2Number">iOS Step 2</span>
+            
+                <h3 id="step2Title">Enter Your ECAE Account Details</h3>
+            
+                <ol class="instruction-list" id="step2List">
+                    <li>Enter your ECAE username.</li>
+                    <li>Enter your ECAE account password.</li>
+                    <li>Tap <strong>Join</strong> or <strong>Connect</strong>.</li>
+                </ol>
+            
+                <div class="information-note" id="step2Note">
+                    Enter your Student ID as the username.<br><br>
+                    Example: <strong>002091</strong>
+                </div>
+            
+                <div class="navigation-buttons">
+            
+                    <button
+                        type="button"
+                        class="previous-button"
+                        onclick="showWifiStep(2, 'iOS Step 1 of 3', 33)"
+                        id="previous2"
+                    >
+                        Previous
+                    </button>
+            
+                    <button
+                        type="button"
+                        class="next-button"
+                        onclick="showWifiStep(4, 'iOS Step 3 of 3', 100)"
+                        id="next2"
+                    >
+                        Next
+                    </button>
+            
+                </div>
+            
+            </article>
+            
+            <!-- =====================================
+                 iOS STEP 3
+            ====================================== -->
+            
+            <article class="step-card" data-step="4">
+            
+                <span class="step-number" id="step3Number">iOS Step 3</span>
+            
+                <h3 id="step3Title">Trust the Connection</h3>
+            
+                <ol class="instruction-list" id="step3List">
+                    <li>Wait for the certificate information to appear.</li>
+                    <li>Tap <strong>Trust</strong> to complete the setup.</li>
+                    <li>Wait for your device to connect to ECAE-BYOD.</li>
+                </ol>
+            
+                <div class="information-note" id="step3Note">
+                    Your IOS device should now be connected to ECAE-BYOD.
+                </div>
+            
+                <div class="navigation-buttons">
+            
+                    <button
+                        type="button"
+                        class="previous-button"
+                        onclick="showWifiStep(3, 'iOS Step 2 of 3', 67)"
+                        id="previous3"
+                    >
+                        Previous
+                    </button>
+            
+                    <button
+                        type="button"
+                        class="next-button"
+                        onclick="finishGuide()"
+                        id="finishIOS"
+                    >
+                        Finish Guide
+                    </button>
+            
+                </div>
+            
+            </article>
+            
+            <!-- =====================================
+                 ANDROID STEP 1
+            ====================================== -->
+            
+            <article class="step-card" data-step="5">
+            
+                <span class="step-number" id="step5Number">Android Step 1</span>
+            
+                <h3 id="step5Title">Open Wi-Fi Settings</h3>
+            
+                <ol class="instruction-list" id="step5List">
+                    <li>Open Wi-Fi settings on your Android device.</li>
+                    <li>Select <strong>ECAE-BYOD</strong> from the available networks.</li>
+                </ol>
+            
+                <div class="navigation-buttons">
+            
+                    <button
+                        type="button"
+                        class="previous-button"
+                        onclick="showDeviceSelection()"
+                        id="previous5"
+                    >
+                        Choose Another Device
+                    </button>
+            
+                    <button
+                        type="button"
+                        class="next-button"
+                        onclick="showWifiStep(6, 'Android Step 2 of 3', 67)"
+                        id="next5"
+                    >
+                        Next
+                    </button>
+            
+                </div>
+            
+            </article>
+            
+            <!-- =====================================
+                 ANDROID STEP 2
+            ====================================== -->
+            
+            <article class="step-card" data-step="6">
+            
+                <span class="step-number" id="step6Number">Android Step 2</span>
+            
+                <h3 id="step6Title">Configure the Wi-Fi Settings</h3>
+            
+                <ol class="instruction-list" id="step6List">
+                    <li>Select <strong>PEAP</strong> as the EAP method.</li>
+                    <li>Select <strong>MSCHAPV2</strong> for Phase 2 authentication.</li>
+                    <li>Set the certificate option to <strong>Don't validate</strong>.</li>
+                    <li>Enter your ECAE Student ID in the Identity field.</li>
+                    <li>Leave the Anonymous Identity field blank.</li>
+                    <li>Enter your ECAE account password.</li>
+                </ol>
+            
+                <div class="information-note" id="step6Note">
+                    Enter your Student ID in the Identity field.<br><br>
+                    Example: <strong>0020911</strong>
+                </div>
+            
+                <div class="navigation-buttons">
+            
+                    <button
+                        type="button"
+                        class="previous-button"
+                        onclick="showWifiStep(5, 'Android Step 1 of 3', 33)"
+                        id="previous6"
+                    >
+                        Previous
+                    </button>
+            
+                    <button
+                        type="button"
+                        class="next-button"
+                        onclick="showWifiStep(7, 'Android Step 3 of 3', 100)"
+                        id="next6"
+                    >
+                        Next
+                    </button>
+            
+                </div>
+            
+            </article>
+            
+            <!-- =====================================
+                 ANDROID STEP 3
+            ====================================== -->
+            
+            <article class="step-card" data-step="7">
+            
+                <span class="step-number" id="step7Number">Android Step 3</span>
+            
+                <h3 id="step7Title">Connect to ECAE-BYOD</h3>
+            
+                <ol class="instruction-list" id="step7List">
+                    <li>Review the connection settings.</li>
+                    <li>Tap <strong>Connect</strong>.</li>
+                    <li>Wait for your device to join the ECAE-BYOD network.</li>
+                </ol>
+            
+                <div class="information-note" id="step7Note">
+                    Your Android device should now be connected to ECAE-BYOD.
+                </div>
+            
+                <div class="navigation-buttons">
+            
+                    <button
+                        type="button"
+                        class="previous-button"
+                        onclick="showWifiStep(6, 'Android Step 2 of 3', 67)"
+                        id="previous7"
+                    >
+                        Previous
+                    </button>
+            
+                    <button
+                        type="button"
+                        class="next-button"
+                        onclick="finishGuide()"
+                        id="finishAndroid"
+                    >
+                        Finish Guide
+                    </button>
+            
+                </div>
+            
+            </article>
+            <!-- =====================================
+                 COMPLETION SCREEN
+            ====================================== -->
+
+            <article
+                class="step-card completion-card"
+                id="completionCard"
+            >
+
+                <div
+                    class="completion-icon"
+                    aria-hidden="true"
+                >
+                    ✅
+                </div>
+
+                <h3 id="completionTitle">Guide Complete</h3>
+
+                <p id="completionDescription">
+                    You have reached the end of the Wi-Fi
+                    Connectivity Guide.
+                </p>
+
+                <div class="completion-actions">
+
+                    <button
+                        type="button"
+                        class="next-button"
+                        onclick="restartGuide()"
+                        id="restartGuideButton"
+                    >
+                        Restart Guide
+                    </button>
+
+
+                    <button type="button" class="back-button" data-nav="home.html" id="completionBackButton">Back to Support Portal</button>
+
+                </div>
+
+            </article>
+
+        </section>
+
+    </main>
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+
+    <footer>
+        <p>
+            © <span id="currentYear"></span>
+            <span id="footerText">
+                Student Support Portal
+            </span>
+        </p>
+    </footer>
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script>
+
+        function openInteractiveGuide() {
+            document.getElementById("formatSelection").style.display = "none";
+        
+            document.getElementById("interactiveGuide").classList.add("visible");
+        
+            showDeviceSelection();
+        
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+        
+        function returnToGuideOptions() {
+            document.getElementById("interactiveGuide").classList.remove("visible");
+        
+            document.getElementById("formatSelection").style.display = "block";
+        
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+        
+        function hideAllStepCards() {
+            const cards = document.querySelectorAll(".step-card");
+        
+            cards.forEach(function (card) {
+                card.classList.remove("active");
+            });
+        }
+        
+        function showDeviceSelection() {
+            hideAllStepCards();
+        
+            const deviceSelection = document.querySelector(
+                '.step-card[data-step="1"]'
+            );
+        
+            deviceSelection.classList.add("active");
+        
+            document.getElementById("stepText").textContent =
+                "Choose Your Device";
+        
+            document.getElementById("progressText").textContent =
+                "0%";
+        
+            document.getElementById("progressFill").style.width =
+                "0%";
+        
+            scrollToInteractiveGuide();
+        }
+        
+        function showWifiStep(stepNumber, stepLabel, progress) {
+            hideAllStepCards();
+        
+            const selectedStep = document.querySelector(
+                '.step-card[data-step="' + stepNumber + '"]'
+            );
+        
+            if (selectedStep) {
+                selectedStep.classList.add("active");
+            }
+        
+            document.getElementById("stepText").textContent =
+                stepLabel;
+        
+            document.getElementById("progressText").textContent =
+                progress + "%";
+        
+            document.getElementById("progressFill").style.width =
+                progress + "%";
+        
+            scrollToInteractiveGuide();
+        }
+        
+        function finishGuide() {
+            hideAllStepCards();
+        
+            document.getElementById("completionCard").classList.add("active");
+        
+            document.getElementById("stepText").textContent =
+                "Guide completed";
+        
+            document.getElementById("progressText").textContent =
+                "100%";
+        
+            document.getElementById("progressFill").style.width =
+                "100%";
+        
+            scrollToInteractiveGuide();
+        }
+        
+        function restartGuide() {
+            showDeviceSelection();
+        }
+        
+        function scrollToInteractiveGuide() {
+            document.getElementById("interactiveGuide").scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+        
+        document.getElementById("currentYear").textContent =
+            new Date().getFullYear();
+            function setLanguage(lang) {
+            
+                if (lang === "ar") {
+            
+                    document.documentElement.lang = "ar";
+                    document.documentElement.dir = "rtl";
+            
+                    document.getElementById("pageTitle").textContent =
+                        "دليل الاتصال بشبكة الواي فاي";
+            
+                    document.getElementById("pageDescription").textContent =
+                        "اختر جهازك واتبع خطوات الاتصال بالشبكة خطوة بخطوة.";
+            
+            
+                    document.getElementById("formatDescription").textContent =
+                        "اتبع الدليل التفاعلي خطوة بخطوة .";
+            
+                    document.getElementById("interactiveTitle").textContent =
+                        "الدليل التفاعلي";
+            
+                    document.getElementById("interactiveButton").textContent =
+                        "ابدأ الدليل التفاعلي";
+            
+                    document.getElementById("backButton").textContent =
+                        "العودة إلى بوابة الدعم";
+            
+                    document.getElementById("interactiveGuideTitle").textContent =
+                        "الدليل التفاعلي للاتصال بشبكة الواي فاي";
+            
+                    document.getElementById("interactiveGuideDescription").textContent =
+                        "اتبع التعليمات خطوة بخطوة.";
+            
+                    document.getElementById("deviceSelectionTitle").textContent =
+                        "ما الجهاز الذي تستخدمه؟";
+            
+                    document.getElementById("iosButton").textContent =
+                        "آيفون / iOS";
+            
+                    document.getElementById("androidButton").textContent =
+                        "أندرويد";
+            
+                    document.getElementById("step1Title").textContent =
+                        "فتح إعدادات الواي فاي";
+            
+                    document.getElementById("step2Title").textContent =
+                        "إدخال بيانات حساب ECAE";
+            
+                    document.getElementById("step3Title").textContent =
+                        "الوثوق بالاتصال";
+            
+                    document.getElementById("step5Title").textContent =
+                        "فتح إعدادات الواي فاي";
+            
+                    document.getElementById("step6Title").textContent =
+                        "تكوين إعدادات الواي فاي";
+            
+                    document.getElementById("step7Title").textContent =
+                        "الاتصال بشبكة ECAE-BYOD";
+            
+                    document.getElementById("step2Note").innerHTML =
+                        "أدخل رقم الطالب كاسم المستخدم.<br><br>مثال: <strong>002091</strong>";
+            
+                    document.getElementById("step3Note").textContent =
+                        "يجب أن يكون جهاز iOS متصلاً الآن بشبكة ECAE-BYOD.";
+            
+                    document.getElementById("step6Note").innerHTML =
+                        "أدخل رقم الطالب في خانة Identity.<br><br>مثال: <strong>0020911</strong>";
+            
+                    document.getElementById("step7Note").textContent =
+                        "يجب أن يكون جهاز Android متصلاً الآن بشبكة ECAE-BYOD.";
+
+                    document.getElementById("deviceSelectionList").innerHTML = `
+                    <li>اختر نوع الجهاز الذي تريد توصيله.</li>
+                    <li>ستظهر لك التعليمات الخاصة بالجهاز الذي اخترته فقط.</li>
+                    `;
+                    document.getElementById("step1List").innerHTML = `
+                    <li>افتح الإعدادات على جهاز iOS.</li>
+                    <li>اختر الواي فاي.</li>
+                    <li>اختر شبكة ECAE-BYOD من الشبكات المتاحة.</li>
+                    `;
+                    document.getElementById("step2List").innerHTML = `
+                        <li>أدخل اسم المستخدم الخاص بـ ECAE.</li>
+                        <li>أدخل كلمة المرور الخاصة بحساب ECAE.</li>
+                        <li>اضغط على انضمام أو اتصال.</li>
+                        `;
+                    document.getElementById("step3List").innerHTML = `
+                    <li>انتظر ظهور معلومات الشهادة.</li>
+                    <li>اضغط على وثوق لإكمال الإعداد.</li>
+                    <li>انتظر حتى يتصل الجهاز بشبكة ECAE‑BYOD.</li>
+                    `;
+                    document.getElementById("step5List").innerHTML = `
+                    <li>افتح إعدادات الواي فاي على جهاز أندرويد.</li>
+                    <li>اختر شبكة ECAE‑BYOD من الشبكات المتاحة.</li>
+                    `;
+                    document.getElementById("step7List").innerHTML = `
+                    <li>راجع إعدادات الاتصال.</li>
+                    <li>اضغط على اتصال.</li>
+                    <li>انتظر حتى يتصل الجهاز بشبكة ECAE‑BYOD.</li>
+                    `;
+                    document.getElementById("step7List").innerHTML = `
+                    <li>راجع إعدادات الاتصال.</li>
+                    <li>اضغط على اتصال.</li>
+                    <li>انتظر حتى يتصل الجهاز بشبكة ECAE‑BYOD.</li>
+                    `;
+            
+                    document.getElementById("chooseDeviceIOS").textContent =
+                        "اختيار جهاز آخر";
+            
+                    document.getElementById("next1").textContent =
+                        "التالي";
+            
+                    document.getElementById("previous2").textContent =
+                        "السابق";
+            
+                    document.getElementById("next2").textContent =
+                        "التالي";
+            
+                    document.getElementById("previous3").textContent =
+                        "السابق";
+                    document.getElementById("finishIOS").textContent =
+                        "إنهاء الدليل";
+            
+                    document.getElementById("previous5").textContent =
+                        "اختيار جهاز آخر";
+            
+                    document.getElementById("next5").textContent =
+                        "التالي";
+            
+                    document.getElementById("previous6").textContent =
+                        "السابق";
+            
+                    document.getElementById("next6").textContent =
+                        "التالي";
+            
+                    document.getElementById("previous7").textContent =
+                        "السابق";
+            
+                    document.getElementById("finishAndroid").textContent =
+                        "إنهاء الدليل";
+            
+                    document.getElementById("completionTitle").textContent =
+                        "اكتمل الدليل";
+            
+                    document.getElementById("completionDescription").textContent =
+                        "لقد وصلت إلى نهاية دليل الاتصال بشبكة الواي فاي.";
+            
+                    document.getElementById("restartGuideButton").textContent =
+                        "إعادة تشغيل الدليل";
+            
+                    document.getElementById("completionBackButton").textContent =
+                        "العودة إلى بوابة الدعم";
+            
+                    document.getElementById("footerText").textContent =
+                        "بوابة دعم الطلاب";
+            
+                } else {
+            
+                    document.documentElement.lang = "en";
+                    document.documentElement.dir = "ltr";
+            
+                    document.getElementById("pageTitle").textContent =
+                        "Wi-Fi Connectivity Guide";
+            
+                    document.getElementById("pageDescription").textContent =
+                        "Select your device and follow the Wi-Fi connection instructions one step at a time.";
+            
+            
+                    document.getElementById("formatDescription").textContent =
+                        "Follow an interactive step-by-step guide or open a PDF guide.";
+            
+                    document.getElementById("interactiveTitle").textContent =
+                        "Interactive Guide";
+            
+                    document.getElementById("interactiveButton").textContent =
+                        "Start Interactive Guide";
+            
+                    document.getElementById("backButton").textContent =
+                        "← Back to Support Portal";
+            
+                    document.getElementById("interactiveGuideTitle").textContent =
+                        "Interactive Wi-Fi Connectivity Guide";
+            
+                    document.getElementById("interactiveGuideDescription").textContent =
+                        "Follow the instructions one step at a time.";
+            
+                    document.getElementById("deviceSelectionTitle").textContent =
+                        "Which Device Are You Using?";
+            
+                    document.getElementById("iosButton").textContent =
+                        "iOS";
+            
+                    document.getElementById("androidButton").textContent =
+                        "Android";
+            
+                    document.getElementById("step1Title").textContent =
+                        "Open Wi‑Fi Settings";
+            
+                    document.getElementById("step2Title").textContent =
+                        "Enter Your ECAE Account Details";
+            
+                    document.getElementById("step3Title").textContent =
+                        "Trust the Connection";
+            
+                    document.getElementById("step5Title").textContent =
+                        "Open Wi‑Fi Settings";
+            
+                    document.getElementById("step6Title").textContent =
+                        "Configure the Wi‑Fi Settings";
+            
+                    document.getElementById("step7Title").textContent =
+                        "Connect to ECAE‑BYOD";
+            
+                    document.getElementById("step2Note").innerHTML =
+                        "Enter your Student ID as the username.<br><br>Example: <strong>002091</strong>";
+            
+                    document.getElementById("step3Note").textContent =
+                        "Your IOS device should now be connected to ECAE-BYOD.";
+            
+                    document.getElementById("step6Note").innerHTML =
+                        "Enter your Student ID in the Identity field.<br><br>Example: <strong>0020911</strong>";
+            
+                    document.getElementById("step7Note").textContent =
+                        "Your Android device should now be connected to ECAE-BYOD.";
+                    document.getElementById("deviceSelectionList").innerHTML = `
+                        <li>Select the type of device you want to connect.</li>
+                        <li>You will only see the instructions for your selected device.</li>
+                    `;
+
+            
+                    document.getElementById("chooseDeviceIOS").textContent =
+                        "Choose Another Device";
+            
+                    document.getElementById("next1").textContent =
+                        "Next";
+            
+                    document.getElementById("previous2").textContent =
+                        "Previous";
+            
+                    document.getElementById("next2").textContent =
+                        "Next";
+            
+                    document.getElementById("previous3").textContent =
+                        "Previous";
+            
+                    document.getElementById("finishIOS").textContent =
+                        "Finish Guide";
+            
+                    document.getElementById("previous5").textContent =
+                        "Choose Another Device";
+            
+                    document.getElementById("next5").textContent =
+                        "Next";
+            
+                    document.getElementById("previous6").textContent =
+                        "Previous";
+            
+                    document.getElementById("next6").textContent =
+                        "Next";
+            
+                    document.getElementById("previous7").textContent =
+                        "Previous";
+            
+                    document.getElementById("finishAndroid").textContent =
+                        "Finish Guide";
+            
+                    document.getElementById("completionTitle").textContent =
+                        "Guide Complete";
+            
+                    document.getElementById("completionDescription").textContent =
+                        "You have reached the end of the Wi‑Fi Connectivity Guide.";
+            
+                    document.getElementById("restartGuideButton").textContent =
+                        "Restart Guide";
+            
+
+            
+                    document.getElementById("completionBackButton").textContent =
+                        "Back to Support Portal";
+            
+                    document.getElementById("footerText").textContent =
+                        "Student Support Portal";
+                }
+            
+                localStorage.setItem("language", lang);
+            }
+            
+            window.addEventListener("load", function () {
+            
+                const savedLanguage =
+                    localStorage.getItem("language") || "en";
+            
+                setLanguage(savedLanguage);
+            
+            });
+    </script>
+
+    <script src="kiosk/qrcode.js"></script>
+    <script src="kiosk/kiosk.js"></script>
+</body>
+
+</html>
